@@ -51,39 +51,7 @@ endfunction()
 
 
 
-function (func)
-    # Define the supported set of keywords
-    set(prefix       ARG)
-    set(noValues     ENABLE_NET COOL_STUFF SNOPP)
-    set(singleValues TARGET)
-    set(multiValues  SOURCES IMAGES)
-    # Process the arguments passed in
-    include(CMakeParseArguments)
-    cmake_parse_arguments(${prefix}
-                        "${noValues}"
-                        "${singleValues}"
-                        "${multiValues}"
-                        ${ARGN})
-    # Log details for each supported keyword
-    message("Option summary:")
-    foreach(arg IN LISTS noValues)
-        if(${${prefix}_${arg}})
-            # if (${arg} EQUAL SNOPP)
-            #     message(SNOPP!!!!!!)
-            # endif()
-            message("  ${arg} enabled")
-            # message ("prefix = ${prefix} arg = ${arg}")
-        else()
-            message("  ${arg} disabled")
-        endif()
-    endforeach()
-    foreach(arg IN LISTS singleValues multiValues)
-        # Single argument values will print as a simple string
-        # Multiple argument values will print as a list
-        message("  ${arg} = ${${prefix}_${arg}}")
-        # message ("prefix = ${prefix} arg = ${arg}")
-    endforeach()
-endfunction()
+
     
 
 
@@ -242,3 +210,18 @@ ENDMACRO()
 # >>>>>>     MESSAGE("Error! USE_GL or USE_GLES must be defined!")
 # >>>>>> ENDIF("#define USE_OPENGL" STREQUAL "${GL_IS_SET}")
 # >>>>>> ENDIF("#define USE_OPENGLES" STREQUAL "${GLES_IS_SET}")
+
+
+
+macro (ph_parent dir)
+    cmake_parse_arguments (p "name;dir" "" "" ${ARGN})
+    if (p_name)
+        set (r "NAME")
+    else ()
+        set (r "ABSOLUTE DIRECTORY")
+    endif ()
+    cmake_language (EVAL CODE "
+    get_filename_component(${dir} ${CMAKE_CURRENT_LIST_DIR} ${r})
+    ")
+    
+endmacro ()
