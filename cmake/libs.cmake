@@ -22,6 +22,9 @@ set (boost_preprocessor_pch
 <boost/preprocessor/control/if.hpp>
 <boost/preprocessor/facilities/empty.hpp>
 <boost/preprocessor/facilities/identity.hpp>
+CACHE 
+STRING 
+"boost pch headers"
 )
 
 set (std_pch
@@ -35,6 +38,9 @@ set (std_pch
 <type_traits>
 <fstream>
 <regex>
+CACHE 
+STRING 
+"std pch headers"
 )
 
 
@@ -62,3 +68,58 @@ function(ph_boost target)
     
     
 endfunction()
+
+
+
+
+function (ph_precompile)
+    set(p       p)
+    set(n0     PRIVATE PUBLIC)
+    set(n1 TARGET)
+    set(n  HEADERS PCH)
+
+    set (availability PUBLIC)
+
+    cmake_parse_arguments( ${p}
+                            "${n0}"
+                            "${n1}"
+                            "${n}"
+                            ${ARGN}
+    )
+
+    foreach(arg IN LISTS n0)
+        if(${${p}_${arg}})
+            set (availability "${arg}")
+            break ()
+        else()
+        endif()
+    endforeach()
+
+    foreach(arg IN LISTS n1)
+        if ("${arg}" STREQUAL TARGET)
+            set (target ${${p}_${arg}})
+        endif ()
+        
+    endforeach()
+    
+
+    foreach (arg IN LISTS n)
+        if ("${arg}" STREQUAL HEADERS)
+            set (${headers} ${headers} ${${p}_${arg}})
+        elseif ("${arg}" STREQUAL PCH)
+            message("PCH = ${${p}_${arg}}")
+            set (${headers} ${headers} ${${p}_${arg}})
+        endif ()
+        list (APPEND headers ${${p}_${arg}})
+    endforeach ()
+    # message(${target})
+    message (${headers})
+    # message (${availability})
+    target_precompile_headers (${target} ${availability} ${headers})
+
+
+    
+endfunction ()
+
+
+
