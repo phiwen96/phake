@@ -247,114 +247,7 @@ macro (ph_parse)
                             ${ARGN}
     )
 
-    function (cont)
-       
-        # foreach (b ${argsaa})
-        #     message (${b})
-        # endforeach ()
-        
-            # message (${ARGN})
-            set(pp      ${p})
-            set(NN0     ${n0})
-            set(NN1 ${n1})
-            set(NN ${n})
-
-
-            cmake_parse_arguments( ${p}
-                                    "${n0}"
-                                    "${n1}"
-                                    "${n}"
-                                    ${ARGN}
-            )
-
-            # message (${NN0})
-
-            # message (${NN1})
-            # message (${NN})
-            # message (${argsaa})
-
-            
-
-            # foreach (arg IN LISTS NN1)
-            #     # message (${arg})
-            #     # message (${arg})
-            #     if(${arg})
-            #         # message("  ${arg} enabled")
-            #         # N0 (${arg})
-            #         message (${arg})
-            #     else()
-            #         # message("  ${arg} disabled")
-            #     endif()
-            # endforeach ()
-
-            foreach (arg IN LISTS NN0)
-                # message (${arg})
-                if(${${pp}_${arg}})
-                    message("  ${arg} enabled")
-                    # N0 (${arg})
-                else()
-                    # message("  ${arg} disabled")
-                endif()
-            endforeach ()
-
-        #     foreach(arg IN LISTS NN1)
-        #   # Single argument values will print as a simple string
-        #   # Multiple argument values will print as a list
-        #         message("  ${arg} = ${lol_${arg}}")
-        #     endforeach()
-        # message ("${ARGN}")
-            # message ("${NN1}")
-
-            foreach (arg IN LISTS NN1)
-                message("  ${arg} = ${${pp}_${arg}}")
-            endforeach ()
-
-            foreach (arg IN LISTS NN)
-                message("  ${arg} = ${${pp}_${arg}}")
-            endforeach ()
-
-            # message ("${NN}")
-
-
-
-            # foreach (a0 ${args})
-            #     foreach (a1 ${n0})
-            #         if ("${a0}" STREQUAL "${a1}")
-            #             # N0 (${a0})
-            #         endif ()
-            #     endforeach ()
-
-            #     foreach (a1 ${n1})
-            #         if ("${a0}" STREQUAL "${a1}")
-            #             # N1 (${a0})
-            #         endif ()
-            #     endforeach ()
-
-            #     foreach (a1 ${n})
-            #         if ("${a0}" STREQUAL "${a1}")
-            #             # N (${a0})
-            #         endif ()
-            #     endforeach ()
-            # endforeach ()
-  
-            
-            
-            # message (${n0})
-
-            # if (${${pp}_${n0}})
-            #     # message ("${n0}")
-            # endif()
-
-            # foreach(arg IN LISTS NN0)
-            #     # message (${arg})
-            #     if(${${pp}_${arg}})
-            #         # message("  ${arg} enabled")
-            #     else()
-            #         # message("  ${arg} disabled")
-            #     endif()
-            # endforeach()
-            
-    endfunction ()
+    
         
 
 
@@ -363,8 +256,8 @@ macro (ph_parse)
     
         foreach (arg IN LISTS N)
         if ("${arg}" STREQUAL n0)
-            list (APPEND n0 ${${p}_${arg}})
-            # set (n0 ${${p}_${arg}})
+            # list (APPEND n0 ${${p}_${arg}})
+            set (n0 ${${p}_${arg}})
 
         elseif ("${arg}" STREQUAL n1)
             # list (APPEND n1 ${${p}_${arg}})
@@ -388,17 +281,20 @@ macro (ph_parse)
         elseif ("${arg}" STREQUAL ARGS)
             
             # message (${${p}_${arg}})
-            # set (argsa ${${p}_${arg}})
+            set (argsa ${${p}_${arg}})
             # message (${argsa})
-            # foreach (a ${argsa})
+        
+            foreach (a ${argsa})
                 # message (${a})
+                list (APPEND res ${a})
+                # set (res ${res} ${a})
                 # list (APPEND argsab ${a})
                 # set (argsac ${argsac} "${a}")
                 
                 # set (b ${a})
                 # cont ("${a}")
                 # cont ()
-            # endforeach ()
+            endforeach ()
             # message (${argsab})
             # message (${argsac})
             # list (APPEND argsad ${${p}_${arg}})
@@ -416,7 +312,53 @@ macro (ph_parse)
         
 
     endforeach ()
-    cont ()
+    message (${res})
+    set (ARGN ${res})
+
+    function (cont)
+       
+
+            set(pp      ARG)
+            set(NN0     ${n0})
+            set(NN1 ${n1})
+            set(NN ${n})
+
+
+            cmake_parse_arguments( ${pp}
+                                    "${n0}"
+                                    "${n1}"
+                                    "${n}"
+                                    ${res}
+            )
+
+            message (${ARGN})
+
+
+            foreach (arg IN LISTS NN0)
+                # message (${arg})
+                if(${${pp}_${arg}})
+                    message("  ${arg} enabled")
+                    # N0 (${arg})
+                else()
+                    message("  ${arg} disabled")
+                endif()
+            endforeach ()
+
+
+            foreach (arg IN LISTS NN1)
+                message("  ${arg} = ${${pp}_${arg}}")
+            endforeach ()
+
+            foreach (arg IN LISTS NN)
+                message("  ${arg} = ${${pp}_${arg}}")
+            endforeach ()
+
+   
+    endfunction ()
+
+    cont (${res})
+
+  
     
 
    
