@@ -233,7 +233,7 @@ endmacro ()
 
 
 
-macro (ph_parse)
+macro (ph_parse1)
     set(p       p)
     set(N0     )
     set(N1 )
@@ -247,13 +247,6 @@ macro (ph_parse)
                             ${ARGN}
     )
 
-    
-        
-
-
-        
-
-    
         foreach (arg IN LISTS N)
         if ("${arg}" STREQUAL n0)
             # list (APPEND n0 ${${p}_${arg}})
@@ -280,29 +273,12 @@ macro (ph_parse)
 
         elseif ("${arg}" STREQUAL ARGS)
             
-            # message (${${p}_${arg}})
             set (argsa ${${p}_${arg}})
-            # message (${argsa})
         
             foreach (a ${argsa})
-                # message (${a})
                 list (APPEND res ${a})
-                # set (res ${res} ${a})
-                # list (APPEND argsab ${a})
-                # set (argsac ${argsac} "${a}")
-                
-                # set (b ${a})
-                # cont ("${a}")
-                # cont ()
             endforeach ()
-            # message (${argsab})
-            # message (${argsac})
-            # list (APPEND argsad ${${p}_${arg}})
-            # message ("${argsad}")
-            # cont (${argsad})
-            # message (${argsab})
             
-            # cont (${${p}_${arg}})
 
         endif ()
 
@@ -331,16 +307,16 @@ macro (ph_parse)
                                     ${res}
             )
 
-            message (${ARGN})
+            message (${res})
 
 
             foreach (arg IN LISTS NN0)
                 # message (${arg})
                 if(${${pp}_${arg}})
-                    message("  ${arg} enabled")
+                    # message("  ${arg} enabled")
                     N0 (${arg})
                 else()
-                    message("  ${arg} disabled")
+                    # message("  ${arg} disabled")
                 endif()
             endforeach ()
 
@@ -348,7 +324,7 @@ macro (ph_parse)
             foreach (arg IN LISTS NN1)
                 # message("  ${arg} = ${${pp}_${arg}}")
                 if (${pp}_${arg})
-                    message("  ${arg} = ${${pp}_${arg}}")
+                    # message("  ${arg} = ${${pp}_${arg}}")
                     N1 (${${pp}_${arg}})
                 endif ()
                 
@@ -356,16 +332,13 @@ macro (ph_parse)
 
             foreach (arg IN LISTS NN)
                 if (${pp}_${arg})
-                    message("  ${arg} = ${${pp}_${arg}}")
-                    N (${${pp}_${arg}})
+                    # message("  ${arg} = ${${pp}_${arg}}")
+                    # N (${${pp}_${arg}})
+                    foreach (a ${${pp}_${arg}})
+                        N (${a})
+                    endforeach ()
+                    
                 endif ()
-                
-                # list (LENGTH ${${pp}_${arg}} length)
-                # if (${length} GREATER "0")
-                #     foreach (a ${arg})
-                #         message(" . ${a} = ${${pp}_${arg}}")
-                #     endforeach ()
-                # endif ()
                 
                 
             endforeach ()
@@ -375,104 +348,128 @@ macro (ph_parse)
 
     cont (${res})
 
-  
     
+endmacro ()
+
+
+
+
+
+
+macro (ph_parse)
+    set(p       p)
+    set(N0     )
+    set(N1 )
+    set(N  n0 n1 n ARGS)
+
+
+    cmake_parse_arguments( ${p}
+                            "${N0}"
+                            "${N1}"
+                            "${N}"
+                            ${ARGN}
+    )
+
+        foreach (arg IN LISTS N)
+        if ("${arg}" STREQUAL n0)
+            # list (APPEND n0 ${${p}_${arg}})
+            set (n0 ${${p}_${arg}})
+
+        elseif ("${arg}" STREQUAL n1)
+            # list (APPEND n1 ${${p}_${arg}})
+            # message (". ${${p}_${arg}} .")
+        
+            set (n1 ${${p}_${arg}})
+
+        elseif ("${arg}" STREQUAL n)
+            set (n ${${p}_${arg}})
+            # list (APPEND n ${${p}_${arg}})
+
+        elseif ("${arg}" STREQUAL f0)
+            # set (APPEND F0 ${${p}_${arg}})
+
+        elseif ("${arg}" STREQUAL f1)
+            # set (APPEND F1 ${${p}_${arg}})
+
+        elseif ("${arg}" STREQUAL fn)
+            # set (APPEND FN ${${p}_${arg}})
+
+        elseif ("${arg}" STREQUAL ARGS)
+            
+            set (argsa ${${p}_${arg}})
+        
+            foreach (a ${argsa})
+                list (APPEND res ${a})
+            endforeach ()
+            
+
+        endif ()
+
+
+        # message ("${argsa}")
+
+        
+
+    endforeach ()
+    message (${res})
+    set (ARGN ${res})
+
+    function (cont)
+       
+
+            set(pp      ARG)
+            set(NN0     ${n0})
+            set(NN1 ${n1})
+            set(NN ${n})
+
+
+            cmake_parse_arguments( ${pp}
+                                    "${n0}"
+                                    "${n1}"
+                                    "${n}"
+                                    ${res}
+            )
+
+            message (${res})
+
+
+            foreach (arg IN LISTS NN0)
+                # message (${arg})
+                if(${${pp}_${arg}})
+                    # message("  ${arg} enabled")
+                    N0 (${arg})
+                else()
+                    # message("  ${arg} disabled")
+                endif()
+            endforeach ()
+
+
+            foreach (arg IN LISTS NN1)
+                # message("  ${arg} = ${${pp}_${arg}}")
+                if (${pp}_${arg})
+                    # message("  ${arg} = ${${pp}_${arg}}")
+                    N1 (${${pp}_${arg}})
+                endif ()
+                
+            endforeach ()
+
+            foreach (arg IN LISTS NN)
+                if (${pp}_${arg})
+                    # message("  ${arg} = ${${pp}_${arg}}")
+                    # N (${${pp}_${arg}})
+                    foreach (a ${${pp}_${arg}})
+                        N (${a})
+                    endforeach ()
+                    
+                endif ()
+                
+                
+            endforeach ()
 
    
+    endfunction ()
 
-    # message (${n0})
-    # function (b)
-    #     foreach (a ${n0})
-    #         # message(b)
-    #         # message (${a})
-    #         if (${p_${a}})
-    #             message("${a} = ${p_${a}}")
-    #         endif ()
-    #         # list (APPEND n_0 "
-    #         #     if (p_${a})
-    #         #         message (\"yes ${a}\")
-    #         #     endif ()
-    #         # ")
-    #     endforeach ()
-    
-    # endfunction()
-    
-    # cmake_language (EVAL CODE "
-        # set(p       p)
-        # set(N0     ${n0})
-        # set(N1 ${n1})
-        # set(N ${n})
+    cont (${res})
 
-
-        # cmake_parse_arguments( ${p}
-        #                         "${n0}"
-        #                         "${n1}"
-        #                         "${n}"
-        #                         ${ARGN}
-        # )
-        # foreach (a ${ARGN})
-        #     if (${p_${a}})
-        #         message (p_${a})
-        #     endif ()
-        # endforeach () 
-        # message (${ARGN})
-        # b ()
-        # foreach (a ${n_0})
-        #     message (\"${a}\")
-        #     cmake_language (EVAL CODE \" ${a}\")
-        # endforeach ()
-
-        # if (p_KUK0)
-            # message (KUK)
-        # endif ()
-
-        # message (\"${n0}\")
-        # string (REPLACE \";\" \" \" n0 \"${n0}\")
-        # message(${n0})
-
-        # foreach (arg ${n0})
-        #     # message (\"${n0}\")
-        #     # message (\"${np}\")
-        #     if (${arg})
-        #         # message (asda)
-        #         # message (p_${arg})
-        #     endif ()
-        # endforeach ()
-
-        # if (p_KUK)
-        #     # message (asdasd)
-        # endif ()
-    
-
-        
-        # foreach (arg IN LISTS N0)
-        #     # set (a ${arg})
-       
-        #     if (${${p}_${arg}})
-        #         # message (""cool)
-        #         # F0
-        #         cmake_language(CALL ${F0} ${arg})
-        #     else ()
-        #         # message (""error)
-        #     endif ()
-        # endforeach ()
-
-        # foreach(arg IN LISTS N1)
-        #     if ("${arg}" STREQUAL TARGET)
-        #         set (target ${${p}_${arg}})
-        #     endif ()
-        
-        # endforeach()
-
-        # foreach (arg IN LISTS N)
-        #     if ("${arg}" STREQUAL n0)
-        # endforeach ()
-        
-        
-    #     "
-    # )
-
-
-    
     
 endmacro ()
