@@ -229,6 +229,18 @@ endmacro ()
 
 
 macro (ph_parse)
-    
+    set(p       p)
+    set(n0     PRIVATE PUBLIC)
+    set(n1 TARGET)
+    set(n  HEADERS PCH)
+
+    set (availability PUBLIC)
+
+    cmake_parse_arguments( ${p}
+                            "${N0}"
+                            "${N1}"
+                            "${N}"
+                            ${ARGN}
+    )
     
 endmacro ()

@@ -1,5 +1,5 @@
 
-set (boost_preprocessor_pch 
+set (boost_pch 
 <boost/preprocessor/seq/for_each.hpp>
 <boost/preprocessor/variadic/to_seq.hpp>
 <boost/preprocessor/facilities/expand.hpp>
@@ -105,15 +105,15 @@ function (ph_precompile)
 
     foreach (arg IN LISTS n)
         if ("${arg}" STREQUAL HEADERS)
-            set (${headers} ${headers} ${${p}_${arg}})
+            # set (${headers} ${headers} ${${p}_${arg}})
+            list (APPEND headers ${${p}_${arg}})
         elseif ("${arg}" STREQUAL PCH)
-            message("PCH = ${${p}_${arg}}")
-            set (${headers} ${headers} ${${p}_${arg}})
+            # set (${headers} ${headers} ${${p}_${arg}})
+            list (APPEND headers ${${p}_${arg}})
         endif ()
-        list (APPEND headers ${${p}_${arg}})
     endforeach ()
     # message(${target})
-    message (${headers})
+    # message (${headers})
     # message (${availability})
     target_precompile_headers (${target} ${availability} ${headers})
 
