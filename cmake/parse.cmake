@@ -275,7 +275,7 @@ function (ph_parse)
     set(p       p)
     set(N0     )
     set(N1 )
-    set(N  n0 n1 n ARGS)
+    set(N  . .. ... args)
 
 
     cmake_parse_arguments( ${p}
@@ -286,17 +286,17 @@ function (ph_parse)
     )
 
         foreach (arg IN LISTS N)
-        if ("${arg}" STREQUAL n0)
+        if ("${arg}" STREQUAL .)
             # list (APPEND n0 ${${p}_${arg}})
             set (n0 ${${p}_${arg}})
 
-        elseif ("${arg}" STREQUAL n1)
+        elseif ("${arg}" STREQUAL ..)
             # list (APPEND n1 ${${p}_${arg}})
             # message (". ${${p}_${arg}} .")
         
             set (n1 ${${p}_${arg}})
 
-        elseif ("${arg}" STREQUAL n)
+        elseif ("${arg}" STREQUAL ...)
             set (n ${${p}_${arg}})
             # list (APPEND n ${${p}_${arg}})
 
@@ -309,7 +309,7 @@ function (ph_parse)
         elseif ("${arg}" STREQUAL fn)
             # set (APPEND FN ${${p}_${arg}})
 
-        elseif ("${arg}" STREQUAL ARGS)
+        elseif ("${arg}" STREQUAL args)
             
             set (argsa ${${p}_${arg}})
         

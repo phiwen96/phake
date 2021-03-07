@@ -32,7 +32,7 @@ set (std_pch
 <vector>
 <string>
 <utility>
-<functional>
+<function>
 <array>
 <tuple>
 <type_traits>
