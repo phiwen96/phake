@@ -74,20 +74,20 @@ endfunction()
 
 function (ph_precompile)
     set(p       p)
-    set(n0     PRIVATE PUBLIC)
-    set(n1 TARGET)
-    set(n  HEADERS PCH)
+    set(N0     PRIVATE PUBLIC)
+    set(N1 TARGET)
+    set(N  HEADERS PCH)
 
     set (availability PUBLIC)
 
     cmake_parse_arguments( ${p}
-                            "${n0}"
-                            "${n1}"
-                            "${n}"
+                            "${N0}"
+                            "${N1}"
+                            "${N}"
                             ${ARGN}
     )
 
-    foreach(arg IN LISTS n0)
+    foreach(arg IN LISTS N0)
         if(${${p}_${arg}})
             set (availability "${arg}")
             break ()
@@ -95,7 +95,7 @@ function (ph_precompile)
         endif()
     endforeach()
 
-    foreach(arg IN LISTS n1)
+    foreach(arg IN LISTS N1)
         if ("${arg}" STREQUAL TARGET)
             set (target ${${p}_${arg}})
         endif ()
@@ -103,7 +103,7 @@ function (ph_precompile)
     endforeach()
     
 
-    foreach (arg IN LISTS n)
+    foreach (arg IN LISTS N)
         if ("${arg}" STREQUAL HEADERS)
             # set (${headers} ${headers} ${${p}_${arg}})
             list (APPEND headers ${${p}_${arg}})

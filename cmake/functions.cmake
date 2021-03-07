@@ -230,11 +230,10 @@ endmacro ()
 
 macro (ph_parse)
     set(p       p)
-    set(n0     PRIVATE PUBLIC)
-    set(n1 TARGET)
-    set(n  HEADERS PCH)
+    set(N0     )
+    set(N1 )
+    set(N  n0 n1 n)
 
-    set (availability PUBLIC)
 
     cmake_parse_arguments( ${p}
                             "${N0}"
@@ -242,5 +241,50 @@ macro (ph_parse)
                             "${N}"
                             ${ARGN}
     )
+
+    # foreach(arg IN LISTS N0)
+    #     if(${${p}_${arg}})
+    #         set (availability "${arg}")
+    #         break ()
+    #     else()
+    #     endif()
+    # endforeach()
+
+    # foreach(arg IN LISTS N1)
+    #     if ("${arg}" STREQUAL TARGET)
+    #         set (target ${${p}_${arg}})
+    #     endif ()
+        
+    # endforeach()
+    
+
+    foreach (arg IN LISTS N)
+        if ("${arg}" STREQUAL n0)
+            # set (${headers} ${headers} ${${p}_${arg}})
+            list (APPEND N0 ${${p}_${arg}})
+        elseif ("${arg}" STREQUAL n1)
+            # set (${headers} ${headers} ${${p}_${arg}})
+            list (APPEND N1 ${${p}_${arg}})
+        elseif ("${arg}" STREQUAL n)
+            list (APPEND N ${${p}_${arg}})
+        endif ()
+    endforeach ()
+
+    cmake_language (EVAL CODE "
+        set(p       p)
+        set(N0     ${N0})
+        set(N1 ${N1})
+        set(N ${N})
+
+
+        cmake_parse_arguments( ${p}
+                                "${N0}"
+                                "${N1}"
+                                "${N}"
+                                ${ARGN}
+        )"
+    )
+
+
     
 endmacro ()
