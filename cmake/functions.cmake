@@ -346,11 +346,26 @@ macro (ph_parse)
 
 
             foreach (arg IN LISTS NN1)
-                message("  ${arg} = ${${pp}_${arg}}")
+                # message("  ${arg} = ${${pp}_${arg}}")
+                foreach (a ${arg})
+                    message("  ${a} = ${${pp}_${arg}}")
+                endforeach ()
+                
             endforeach ()
 
             foreach (arg IN LISTS NN)
-                message("  ${arg} = ${${pp}_${arg}}")
+                if (${pp}_${arg})
+                    message("  ${arg} = ${${pp}_${arg}}")
+                endif ()
+                
+                # list (LENGTH ${${pp}_${arg}} length)
+                # if (${length} GREATER "0")
+                #     foreach (a ${arg})
+                #         message(" . ${a} = ${${pp}_${arg}}")
+                #     endforeach ()
+                # endif ()
+                
+                
             endforeach ()
 
    
