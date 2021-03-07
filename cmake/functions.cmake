@@ -247,61 +247,95 @@ macro (ph_parse)
                             ${ARGN}
     )
 
-    function (cont argsaa)
+    function (cont)
        
         # foreach (b ${argsaa})
         #     message (${b})
         # endforeach ()
         
             # message (${ARGN})
-            set(pp      lol)
+            set(pp      ${p})
             set(NN0     ${n0})
             set(NN1 ${n1})
             set(NN ${n})
 
 
-            cmake_parse_arguments( ${pp}
+            cmake_parse_arguments( ${p}
                                     "${n0}"
                                     "${n1}"
                                     "${n}"
-                                    ${argsaa}
+                                    ${ARGN}
             )
 
-        
+            # message (${NN0})
+
+            # message (${NN1})
+            # message (${NN})
             # message (${argsaa})
+
+            
+
+            # foreach (arg IN LISTS NN1)
+            #     # message (${arg})
+            #     # message (${arg})
+            #     if(${arg})
+            #         # message("  ${arg} enabled")
+            #         # N0 (${arg})
+            #         message (${arg})
+            #     else()
+            #         # message("  ${arg} disabled")
+            #     endif()
+            # endforeach ()
 
             foreach (arg IN LISTS NN0)
                 # message (${arg})
-                if(lol_${arg})
+                if(${${pp}_${arg}})
                     message("  ${arg} enabled")
+                    # N0 (${arg})
                 else()
-                    message("  ${arg} disabled")
+                    # message("  ${arg} disabled")
                 endif()
+            endforeach ()
+
+        #     foreach(arg IN LISTS NN1)
+        #   # Single argument values will print as a simple string
+        #   # Multiple argument values will print as a list
+        #         message("  ${arg} = ${lol_${arg}}")
+        #     endforeach()
+        # message ("${ARGN}")
+            # message ("${NN1}")
+
+            foreach (arg IN LISTS NN1)
+                message("  ${arg} = ${${pp}_${arg}}")
+            endforeach ()
+
+            foreach (arg IN LISTS NN)
+                message("  ${arg} = ${${pp}_${arg}}")
             endforeach ()
 
             # message ("${NN}")
 
 
 
-            foreach (a0 ${args})
-                foreach (a1 ${n0})
-                    if ("${a0}" STREQUAL "${a1}")
-                        # N0 (${a0})
-                    endif ()
-                endforeach ()
+            # foreach (a0 ${args})
+            #     foreach (a1 ${n0})
+            #         if ("${a0}" STREQUAL "${a1}")
+            #             # N0 (${a0})
+            #         endif ()
+            #     endforeach ()
 
-                foreach (a1 ${n1})
-                    if ("${a0}" STREQUAL "${a1}")
-                        # N1 (${a0})
-                    endif ()
-                endforeach ()
+            #     foreach (a1 ${n1})
+            #         if ("${a0}" STREQUAL "${a1}")
+            #             # N1 (${a0})
+            #         endif ()
+            #     endforeach ()
 
-                foreach (a1 ${n})
-                    if ("${a0}" STREQUAL "${a1}")
-                        # N (${a0})
-                    endif ()
-                endforeach ()
-            endforeach ()
+            #     foreach (a1 ${n})
+            #         if ("${a0}" STREQUAL "${a1}")
+            #             # N (${a0})
+            #         endif ()
+            #     endforeach ()
+            # endforeach ()
   
             
             
@@ -320,41 +354,51 @@ macro (ph_parse)
             #     endif()
             # endforeach()
             
-        endfunction ()
+    endfunction ()
         
 
-    foreach (arg IN LISTS N)
+
+        
+
+    
+        foreach (arg IN LISTS N)
         if ("${arg}" STREQUAL n0)
             list (APPEND n0 ${${p}_${arg}})
+            # set (n0 ${${p}_${arg}})
 
         elseif ("${arg}" STREQUAL n1)
-            list (APPEND n1 ${${p}_${arg}})
+            # list (APPEND n1 ${${p}_${arg}})
+            # message (". ${${p}_${arg}} .")
+        
+            set (n1 ${${p}_${arg}})
 
         elseif ("${arg}" STREQUAL n)
-            list (APPEND n ${${p}_${arg}})
+            set (n ${${p}_${arg}})
+            # list (APPEND n ${${p}_${arg}})
 
         elseif ("${arg}" STREQUAL f0)
-            set (APPEND F0 ${${p}_${arg}})
+            # set (APPEND F0 ${${p}_${arg}})
 
         elseif ("${arg}" STREQUAL f1)
-            set (APPEND F1 ${${p}_${arg}})
+            # set (APPEND F1 ${${p}_${arg}})
 
         elseif ("${arg}" STREQUAL fn)
-            set (APPEND FN ${${p}_${arg}})
+            # set (APPEND FN ${${p}_${arg}})
 
         elseif ("${arg}" STREQUAL ARGS)
             
             # message (${${p}_${arg}})
-            set (argsa ${${p}_${arg}})
+            # set (argsa ${${p}_${arg}})
             # message (${argsa})
-            foreach (a ${argsa})
+            # foreach (a ${argsa})
                 # message (${a})
-                list (APPEND argsab ${a})
-                set (argsac ${argsac} "${a}")
+                # list (APPEND argsab ${a})
+                # set (argsac ${argsac} "${a}")
                 
                 # set (b ${a})
-                cont (${a})
-            endforeach ()
+                # cont ("${a}")
+                # cont ()
+            # endforeach ()
             # message (${argsab})
             # message (${argsac})
             # list (APPEND argsad ${${p}_${arg}})
@@ -366,12 +410,13 @@ macro (ph_parse)
 
         endif ()
 
+
         # message ("${argsa}")
 
         
 
     endforeach ()
-   
+    cont ()
     
 
    
