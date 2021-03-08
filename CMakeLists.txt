@@ -8,6 +8,8 @@ include (cmake/libs.cmake)
 
 include (cmake/functions.cmake)
 
+include (cmake/git.cmake)
+
 # file (GLOB_RECURSE cmakes cmake/*.cmake)
 
 # foreach (file ${cmakes})
