@@ -7,7 +7,7 @@ if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
         message(STATUS "Submodule update")
 		execute_process(
 			# COMMAND ${GIT_EXECUTABLE} submodule update --remote --merge #--recursive
-            COMMAND ${GIT_EXECUTABLE} submodule update --remote --merge
+            COMMAND ${GIT_EXECUTABLE} submodule update --init --recursive
                         WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
                         RESULT_VARIABLE GIT_SUBMOD_RESULT
 		)
