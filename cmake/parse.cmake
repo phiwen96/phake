@@ -269,7 +269,7 @@ endmacro ()
 
 
 
-function (ph_parse)
+macro (ph_parse)
     set (ARG_N ${ARGN})
 
     set(p       p)
@@ -329,15 +329,16 @@ function (ph_parse)
     # message (${res})
     # set (ARG ${res})
 
-    function (cont)
+    macro (cont)
        
-
+    # message (${res})
+    
             set(pp      ARG)
             set(NN0     ${n0})
             set(NN1 ${n1})
             set(NN ${n})
 
-
+            
             cmake_parse_arguments( ${pp}
                                     "${n0}"
                                     "${n1}"
@@ -392,9 +393,9 @@ function (ph_parse)
             endforeach ()
 
    
-    endfunction ()
+            endmacro ()
 
     cont (${res})
 
     
-endfunction ()
+endmacro ()

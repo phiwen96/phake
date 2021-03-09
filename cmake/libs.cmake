@@ -44,6 +44,9 @@ STRING
 
 set (ph_catch2_pch
 <catch2/catch.hpp>
+CACHE 
+STRING 
+"std pch headers"
 )
 
 

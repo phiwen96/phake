@@ -219,22 +219,61 @@ endmacro ()
 include (FetchContent)
 
 macro (ph_fetch)
+    # message ("hejsan")
     function (catch2)
-        message ("fetching catch2")
 
-        # FetchContent_Declare(
-        # catch
-        # GIT_REPOSITORY https://github.com/catchorg/Catch2.git
-        # GIT_TAG v2.9.1)
+        FetchContent_Declare(
+        catch
+        GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+        GIT_TAG devel)
         
-        # FetchContent_GetProperties (catch) 
+        FetchContent_GetProperties (catch) 
         
-        # if(NOT catch_POPULATED)
-        #     FetchContent_Populate (catch)
-        #     add_subdirectory (${catch_SOURCE_DIR} ${catch_BINARY_DIR}) 
-        # endif()
+        if(NOT catch_POPULATED)
+            FetchContent_Populate (catch)
+            add_subdirectory (${catch_SOURCE_DIR} ${catch_BINARY_DIR}) 
+        endif()
+
     endfunction ()
     
-    ph_parse (. catch2)
+    ph_parse (. catch2 args ${ARGN})
 
 endmacro ()
+
+
+
+
+MACRO(ph_subdirs)
+
+    set (target ${CMAKE_CURRENT_LIST_DIR})
+    
+    macro (TARGET folder)
+        set (target ${folder})
+    endmacro ()
+
+    # set (result "")
+
+    macro (RESULT res)
+        set (result ${res})
+    endmacro ()
+
+    
+
+    ph_parse (.. TARGET RESULT args ${ARGN})
+
+    message (${target})
+
+    set(dirlist "")
+
+
+    file(GLOB children RELATIVE ${target} ${target}/*)
+    foreach(child ${children})
+        if(IS_DIRECTORY ${target}/${child})
+            list(APPEND dirlist ${child})
+        endif()
+    endforeach()
+
+    set (${result} ${dirlist})
+
+ENDMACRO()
+
