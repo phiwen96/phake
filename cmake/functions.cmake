@@ -243,7 +243,7 @@ endmacro ()
 
 
 
-MACRO(ph_subdirs)
+macro (ph_subdirs)
 
     set (target ${CMAKE_CURRENT_LIST_DIR})
     
@@ -266,14 +266,14 @@ MACRO(ph_subdirs)
     set(dirlist "")
 
 
-    file(GLOB children RELATIVE ${target} ${target}/*)
-    foreach(child ${children})
-        if(IS_DIRECTORY ${target}/${child})
-            list(APPEND dirlist ${child})
-        endif()
-    endforeach()
+    file (GLOB children RELATIVE ${target} ${target}/*)
+    foreach (child ${children})
+        if (IS_DIRECTORY ${target}/${child})
+            list (APPEND dirlist ${child})
+        endif ()
+    endforeach ()
 
     set (${result} ${dirlist})
 
-ENDMACRO()
+endmacro ()
 
