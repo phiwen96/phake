@@ -247,6 +247,7 @@ endmacro ()
 macro (ph_subdirs)
 
     set (target ${CMAKE_CURRENT_LIST_DIR})
+    set (abs_or_rel RELATIVE)
     
     macro (TARGET folder)
         set (target ${folder})
@@ -258,16 +259,24 @@ macro (ph_subdirs)
         set (result ${res})
     endmacro ()
 
+    macro (ABSOLUTE)
+        set (abs_or_rel ABSOLUTE)
+    endmacro ()
+
+    macro (RELATIVE)
+        set (abs_or_rel ABSOLUTE)
+    endmacro ()
+
     
 
-    ph_parse (.. TARGET RESULT args ${ARGN})
+    ph_parse (. RELATIVE ABSOLUTE .. TARGET RESULT args ${ARGN})
 
     # message (${target})
 
     set(dirlist "")
 
 
-    file (GLOB children RELATIVE ${target} ${target}/*)
+    file (GLOB children ${abs_or_rel} ${target} ${target}/*)
     foreach (child ${children})
         if (IS_DIRECTORY ${target}/${child})
             list (APPEND dirlist ${child})
@@ -285,6 +294,9 @@ endmacro ()
 macro (ph_subfiles)
 
     set (target ${CMAKE_CURRENT_LIST_DIR})
+
+    set (rel true)
+    set (abs_or_rel RELATIVE)
         
     macro (TARGET folder)
         set (target ${folder})
@@ -296,14 +308,28 @@ macro (ph_subfiles)
         set (result ${res})
     endmacro ()
 
-    ph_parse (.. TARGET RESULT args ${ARGN})
+    macro (ABSOLUTE)
+        set (rel false)
+        set (abs_or_rel ABSOLUTE)
+        # file (GLOB children ABSOLUTE ${target}/ ${target}/*)
+    endmacro ()
+
+    macro (RELATIVE)
+        set (rel false)
+        set (abs_or_rel RELATIVE)
+        # file (GLOB children RELATIVE ${target}/ ${target}/*)
+    endmacro ()
+    
+
+    ph_parse (. RELATIVE ABSOLUTE .. TARGET RESULT args ${ARGN})
 
 
 
     set(dirlist "")
 
-
-    file (GLOB children ABSOLUTE ${target}/ ${target}/*)
+    
+    
+    file (GLOB children ${abs_or_rel} ${target}/ ${target}/*)
     foreach (child ${children})
         if (NOT IS_DIRECTORY ${target}/${child})
             list (APPEND dirlist ${child})
