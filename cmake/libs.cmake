@@ -78,7 +78,7 @@ endfunction()
 
 
 
-function (ph_precompile)
+macro (ph_precompile)
 # ph_parse (.. TARGET ... HEADERS PC)
     set(p       p)
     set(N0     PRIVATE PUBLIC)
@@ -126,7 +126,7 @@ function (ph_precompile)
 
 
     
-endfunction ()
+endmacro ()
 
 
 

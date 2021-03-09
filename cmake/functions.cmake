@@ -220,12 +220,13 @@ include (FetchContent)
 
 macro (ph_fetch)
     # message ("hejsan")
-    function (catch2)
+    macro (catch2)
 
         FetchContent_Declare(
         catch
         GIT_REPOSITORY https://github.com/catchorg/Catch2.git
-        GIT_TAG devel)
+        GIT_TAG devel
+        )
         
         FetchContent_GetProperties (catch) 
         
@@ -234,7 +235,7 @@ macro (ph_fetch)
             add_subdirectory (${catch_SOURCE_DIR} ${catch_BINARY_DIR}) 
         endif()
 
-    endfunction ()
+    endmacro ()
     
     ph_parse (. catch2 args ${ARGN})
 
@@ -261,7 +262,7 @@ macro (ph_subdirs)
 
     ph_parse (.. TARGET RESULT args ${ARGN})
 
-    message (${target})
+    # message (${target})
 
     set(dirlist "")
 
@@ -277,3 +278,38 @@ macro (ph_subdirs)
 
 endmacro ()
 
+
+
+
+
+macro (ph_subfiles)
+
+    set (target ${CMAKE_CURRENT_LIST_DIR})
+        
+    macro (TARGET folder)
+        set (target ${folder})
+    endmacro ()
+
+    # set (result "")
+
+    macro (RESULT res)
+        set (result ${res})
+    endmacro ()
+
+    ph_parse (.. TARGET RESULT args ${ARGN})
+
+
+
+    set(dirlist "")
+
+
+    file (GLOB children ABSOLUTE ${target}/ ${target}/*)
+    foreach (child ${children})
+        if (NOT IS_DIRECTORY ${target}/${child})
+            list (APPEND dirlist ${child})
+        endif ()
+    endforeach ()
+
+    set (${result} ${dirlist})
+    
+endmacro ()
