@@ -42,6 +42,10 @@ STRING
 "std pch headers"
 )
 
+set (ph_catch2_pch
+<catch2/catch.hpp>
+)
+
 
 
 function(ph_boost target)
@@ -72,6 +76,7 @@ endfunction()
 
 
 function (ph_precompile)
+# ph_parse (.. TARGET ... HEADERS PC)
     set(p       p)
     set(N0     PRIVATE PUBLIC)
     set(N1 TARGET)
