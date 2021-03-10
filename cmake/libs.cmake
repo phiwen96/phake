@@ -37,6 +37,7 @@ set (std_pch
 <type_traits>
 <fstream>
 <regex>
+<optional>
 CACHE 
 STRING 
 "std pch headers"
