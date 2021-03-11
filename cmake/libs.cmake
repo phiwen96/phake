@@ -34,7 +34,7 @@ set (std_pch
 <utility>
 <array>
 <tuple>
-<type_traits>
+<type_traits>x      
 <fstream>
 <regex>
 <optional>
