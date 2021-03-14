@@ -28,13 +28,15 @@ STRING
 )
 
 set (std_pch
+<set>
+<queue>
 <iostream>
 <vector>
 <string>
 <utility>
 <array>
 <tuple>
-<type_traits>x      
+<type_traits>
 <fstream>
 <regex>
 <optional>
