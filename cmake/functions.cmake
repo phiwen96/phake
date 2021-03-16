@@ -225,7 +225,7 @@ macro (ph_fetch)
         FetchContent_Declare(
         catch
         GIT_REPOSITORY https://github.com/catchorg/Catch2.git
-        GIT_TAG devel
+         GIT_TAG v2.9.1
         )
         
         FetchContent_GetProperties (catch) 
