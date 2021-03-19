@@ -41,6 +41,7 @@ set (std_pch
 <regex>
 <optional>
 <algorithm>
+<cstring>
 CACHE 
 STRING 
 "std pch headers"
