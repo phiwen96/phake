@@ -42,6 +42,7 @@ set (std_pch
 <optional>
 <algorithm>
 <cstring>
+<cstdlib>
 CACHE 
 STRING 
 "std pch headers"
