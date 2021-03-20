@@ -22,6 +22,7 @@ set (boost_pch
 <boost/preprocessor/control/if.hpp>
 <boost/preprocessor/facilities/empty.hpp>
 <boost/preprocessor/facilities/identity.hpp>
+<boost/tti/has_template.hpp>
 CACHE 
 STRING 
 "boost pch headers"
