@@ -23,6 +23,14 @@ set (boost_pch
 <boost/preprocessor/facilities/empty.hpp>
 <boost/preprocessor/facilities/identity.hpp>
 <boost/tti/has_template.hpp>
+<boost/tti/has_type.hpp>
+<boost/tti/has_member_function.hpp>
+<boost/tti/has_member_data.hpp>
+<boost/tti/has_static_member_data.hpp>
+<boost/tti/has_static_member_function.hpp>
+<boost/tti/has_data.hpp>
+<boost/tti/has_function.hpp>
+<boost/tti/member_type.hpp>
 CACHE 
 STRING 
 "boost pch headers"
