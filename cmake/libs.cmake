@@ -46,6 +46,7 @@ set (std_pch
 <array>
 <tuple>
 <type_traits>
+<filesystem>
 <fstream>
 <regex>
 <optional>
