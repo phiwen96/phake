@@ -350,3 +350,15 @@ macro (ph_run)
 		endif ()	
 	endif ()
 endmacro ()
+
+
+# add_custom_target(zoo ALL
+#     COMMAND echo "$<TARGET_FILE:${self}>"#echo "This is ALL target 'zoo', and it depends on ${TEST_FILE}"
+#     # If the file exists, then commands related to that file won't be executed
+#     # DONOT let other target depends on the same OUTPUT as current target,
+#     #   or it may be bad when doing parallel make
+# #     DEPENDS ${TEST_FILE}
+
+#     # to make quotes printable,for example
+#     VERBATIM
+# )
