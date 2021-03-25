@@ -13,19 +13,19 @@ include(CMakeParseArguments)
 
 
 macro (ph_define_self res)
-    cmake_parse_arguments(
-        P
-        "SINGLE;ANOTHER;name;dir" "ONE_VALUE;ALSO_ONE_VALUE" "MULTI_VALUES"
-        ${ARGN}
-    ) 
+#     cmake_parse_arguments(
+#         P
+#         "SINGLE;ANOTHER;name;dir" "ONE_VALUE;ALSO_ONE_VALUE" "MULTI_VALUES"
+#         ${ARGN}
+#     ) 
     # cmake_parse_arguments (KUK "${options}" "" "" ${ARGN})
-    if (P_name)
-    get_filename_component (${res} ${CMAKE_CURRENT_LIST_DIR} NAME)
-    elseif (P_dir)
-        get_filename_component (${res} ${CMAKE_CURRENT_LIST_DIR} ABSOLUTE DIRECTORY)
-    else ()
+#     if (P_name)
+#     get_filename_component (${res} ${CMAKE_CURRENT_LIST_DIR} NAME)
+#     elseif (P_dir)
+#         get_filename_component (${res} ${CMAKE_CURRENT_LIST_DIR} ABSOLUTE DIRECTORY)
+#     else ()
         get_filename_component (${res} ${CMAKE_CURRENT_LIST_DIR} NAME)
-    endif ()
+#     endif ()
     
     string(REPLACE " " "_" res ${res})
 endmacro ()
@@ -338,4 +338,14 @@ macro (ph_subfiles)
 
     set (${result} ${dirlist})
     
+endmacro ()
+
+
+
+macro (ph_run)
+	if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+		if ("${run}" STREQUAL "${self}")
+			add_custom_target (${self}_run ALL COMMAND $<TARGET_FILE:${self}>)
+		endif ()	
+	endif ()
 endmacro ()

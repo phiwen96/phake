@@ -37,6 +37,7 @@ STRING
 )
 
 set (std_pch
+<cctype>
 <set>
 <queue>
 <iostream>
@@ -53,6 +54,7 @@ set (std_pch
 <algorithm>
 <cstring>
 <cstdlib>
+<filesystem>
 CACHE 
 STRING 
 "std pch headers"
