@@ -343,6 +343,7 @@ endmacro ()
 
 
 macro (ph_run)
+	# example usage: cmake -DCMAKE_BUILD_TYPE=Debug -Drun=libtest -Dwith_args="hej kuk" .. . && make  
 	if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 		if ("${run}" STREQUAL "${self}")
 			add_custom_target (${self}_run ALL COMMAND $<TARGET_FILE:${self}> ${with_args})
