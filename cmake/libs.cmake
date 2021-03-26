@@ -55,6 +55,9 @@ set (std_pch
 <cstring>
 <cstdlib>
 <filesystem>
+<variant>
+<charconv>
+<concepts>
 CACHE 
 STRING 
 "std pch headers"
