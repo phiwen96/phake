@@ -34,6 +34,7 @@ set (boost_pch
 CACHE 
 STRING 
 "boost pch headers"
+FORCE
 )
 
 set (std_pch
@@ -58,9 +59,11 @@ set (std_pch
 <variant>
 <charconv>
 <concepts>
+<thread>
 CACHE 
 STRING 
 "std pch headers"
+FORCE
 )
 
 set (ph_catch2_pch
@@ -68,6 +71,7 @@ set (ph_catch2_pch
 CACHE 
 STRING 
 "std pch headers"
+FORCE
 )
 
 
