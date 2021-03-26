@@ -60,6 +60,7 @@ set (std_pch
 <charconv>
 <concepts>
 <thread>
+<iterator>
 CACHE 
 STRING 
 "std pch headers"
