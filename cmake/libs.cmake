@@ -58,6 +58,7 @@ set (std_pch
 <variant>
 <charconv>
 <concepts>
+<experimental/coroutine>
 CACHE 
 STRING 
 "std pch headers"
