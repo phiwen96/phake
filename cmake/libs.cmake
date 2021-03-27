@@ -62,7 +62,9 @@ set (std_pch
 <thread>
 <iterator>
 <random>
-<future>
+# <future>
+<atomic>
+
 # <latch>
 # <barrier>
 CACHE 
