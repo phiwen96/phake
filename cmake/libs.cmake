@@ -63,8 +63,8 @@ set (std_pch
 <iterator>
 <random>
 <future>
-<latch>
-<barrier>
+# <latch>
+# <barrier>
 CACHE 
 STRING 
 "std pch headers"
