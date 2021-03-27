@@ -12,7 +12,7 @@ if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
         #                 RESULT_VARIABLE GIT_SUBMOD_RESULT)
 		execute_process(
 			# COMMAND ${GIT_EXECUTABLE} submodule update --init --recursive
-			COMMAND ${GIT_EXECUTABLE} submodule update --remote --merge#submodule update --remote --merge --init --recursive
+			COMMAND ${GIT_EXECUTABLE} submodule update --remote --merge origin/master#submodule update --remote --merge --init --recursive
 
 						# COMMAND ${GIT_EXECUTABLE} submodule foreach git pull main
                         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
