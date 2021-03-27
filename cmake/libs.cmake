@@ -61,6 +61,7 @@ set (std_pch
 <concepts>
 <thread>
 <iterator>
+<random>
 CACHE 
 STRING 
 "std pch headers"
