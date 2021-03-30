@@ -62,6 +62,7 @@ set (std_pch
 <thread>
 <iterator>
 <random>
+<sstream>
 # <future>
 <atomic>
 
