@@ -57,6 +57,7 @@ set (std_pch
 <cstdlib>
 <filesystem>
 <variant>
+<any>
 <charconv>
 <concepts>
 <thread>
