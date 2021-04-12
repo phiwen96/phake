@@ -31,6 +31,7 @@ set (boost_pch
 <boost/tti/has_data.hpp>
 <boost/tti/has_function.hpp>
 <boost/tti/member_type.hpp>
+<boost/preprocessor/variadic/to_tuple.hpp>
 CACHE 
 STRING 
 "boost pch headers"
