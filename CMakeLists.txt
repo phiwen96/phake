@@ -1,6 +1,41 @@
 cmake_minimum_required (VERSION 3.19.6)
 
 
+macro(lol)
+	# processor
+	set (_x86_64 "false")
+	set (_arm64 "false")
+	if (${CMAKE_SYSTEM_PROCESSOR} MATCHES "x86_64")
+		set (_x86_64 "true")
+	elseif (${CMAKE_SYSTEM_PROCESSOR} MATCHES "arm64")
+		set (_arm64 "true")
+	else ()
+		message (FATAL_ERROR "unknown processor")
+	endif ()
+
+	set (_Darwin "false")
+	set (_Linux "false")
+	set (_Windows "false")
+
+	if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+		# message("Darwin")
+		set (_Darwin "true")
+		# add_compile_definitions (Darwin)
+	elseif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+		set (_Linux "true")
+		# add_compile_definitions (Linux)
+	elseif(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
+		message (FATAL_ERROR "not yet defined for Windows")
+
+		set (_Windows 1)
+		# add_compile_definitions (Windows)
+	else ()
+		message (FATAL_ERROR "unknown system ${CMAKE_SYSTEM_NAME}")
+	endif ()
+endmacro(lol)
+
+
+
 
 
 list (APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
