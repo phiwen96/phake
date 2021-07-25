@@ -1,6 +1,12 @@
 cmake_minimum_required (VERSION 3.19.6)
 
-add_custom_target (phake)
+
+if (TARGET ph_cmake)
+	return ()
+endif ()
+
+add_custom_target (ph_cmake)
+
 
 
 macro(lol)
