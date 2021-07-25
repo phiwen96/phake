@@ -49,10 +49,38 @@ if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
         message(STATUS "Submodule update")
 		execute_process(
 			# COMMAND ${GIT_EXECUTABLE} submodule update --remote --merge #--recursive
-            COMMAND ${GIT_EXECUTABLE} submodule update --init --recursive 
+            COMMAND ${GIT_EXECUTABLE} submodule update --init --recursive --jobs 8
                         WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
                         RESULT_VARIABLE GIT_SUBMOD_RESULT
 		)
+
+		# execute_process(
+		# 	# COMMAND ${GIT_EXECUTABLE} submodule update --remote --merge #--recursive
+        #     COMMAND ${GIT_EXECUTABLE} submodule update --remote
+
+        #                 WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+        #                 RESULT_VARIABLE GIT_SUBMOD_RESULT
+		# )
+
+		# execute_process(
+		# 	# COMMAND ${GIT_EXECUTABLE} submodule update --remote --merge #--recursive
+        #     COMMAND ${GIT_EXECUTABLE} submodule update --remote
+
+        #                 WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+        #                 RESULT_VARIABLE GIT_SUBMOD_RESULT
+		# )
+
+		# execute_process(
+		# 	# COMMAND ${GIT_EXECUTABLE} submodule update --remote --merge #--recursive
+        #     COMMAND ${GIT_EXECUTABLE} pull
+
+        #                 WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+        #                 RESULT_VARIABLE GIT_SUBMOD_RESULT
+		# )
+
+
+
+
 
         if(NOT GIT_SUBMOD_RESULT EQUAL "0")
             message(FATAL_ERROR "git submodule update --init failed with ${GIT_SUBMOD_RESULT}, please checkout submodules")
